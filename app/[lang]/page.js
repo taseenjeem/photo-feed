@@ -1,13 +1,10 @@
-import { getDictionary } from "./dictionaries";
+import PhotoList from "@/components/page/landing-page/PhotoList";
 
-const LandingPage = async ({ params }) => {
-  const dictionary = await getDictionary(params.lang);
+const LandingPage = async () => {
+  const response = await fetch(`${process.env.BASE_API_URL}/photos`);
+  const photos = await response.json();
 
-  return (
-    <>
-      <h1>Hello World {dictionary?.uploadedOn}</h1>
-    </>
-  );
+  return <PhotoList photos={photos} />;
 };
 
 export default LandingPage;
